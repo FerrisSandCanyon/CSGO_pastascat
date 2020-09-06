@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pastascat_dll", "pastascat_dll\pastascat_dll.vcxproj", "{9C761279-3810-41F7-9132-E0936486AFDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pastacat_sdk", "pastacat_sdk", "{4E1A6A78-0581-4628-8F2F-EB7C24441C46}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pastascat_loader", "pastascat_loader\pastascat_loader.vcxproj", "{799D36E0-BA55-40C5-9E3C-D1E7244B345B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pastascat_sdk", "pastascat_sdk", "{5C81987F-2630-4CC2-9600-241DBD74D239}"
+	ProjectSection(SolutionItems) = preProject
+		pastascat_sdk\hash.cpp = pastascat_sdk\hash.cpp
+		pastascat_sdk\hash.h = pastascat_sdk\hash.h
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C761279-3810-41F7-9132-E0936486AFDB}.Debug|x86.ActiveCfg = Debug|Win32
+		{9C761279-3810-41F7-9132-E0936486AFDB}.Debug|x86.Build.0 = Debug|Win32
+		{9C761279-3810-41F7-9132-E0936486AFDB}.Release|x86.ActiveCfg = Release|Win32
+		{9C761279-3810-41F7-9132-E0936486AFDB}.Release|x86.Build.0 = Release|Win32
+		{799D36E0-BA55-40C5-9E3C-D1E7244B345B}.Debug|x86.ActiveCfg = Debug|Win32
+		{799D36E0-BA55-40C5-9E3C-D1E7244B345B}.Debug|x86.Build.0 = Debug|Win32
+		{799D36E0-BA55-40C5-9E3C-D1E7244B345B}.Release|x86.ActiveCfg = Release|Win32
+		{799D36E0-BA55-40C5-9E3C-D1E7244B345B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D70928F-BF15-4F84-87DD-5DD4418268CD}
+	EndGlobalSection
+EndGlobal

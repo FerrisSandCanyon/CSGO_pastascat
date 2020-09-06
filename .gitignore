@@ -1,0 +1,5 @@
+build/
+build_tools/
+.vs/
+pastascat_dll/obj/
+pastascat_loader/obj/
