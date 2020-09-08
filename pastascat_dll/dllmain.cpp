@@ -105,7 +105,7 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
 
     #pragma region Hook Setup
     // Hook WindowProcedure
-    if ( !(pc::hooks::wndproc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(pc::global::hwndCSGO, GWLP_WNDPROC, reinterpret_cast<LONG>(pc::hooked::WindowProc)))) )
+    if ( !(pc::ohk::wndproc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(pc::global::hwndCSGO, GWLP_WNDPROC, reinterpret_cast<LONG>(pc::hooked::WindowProc)))) )
     {
         MessageBox(pc::global::hwndCSGO, xorstr(L"Failed to hook the windows procedure callback"), xorstr(L"pastascat"), 0);
         FreeLibraryAndExitThread(pc::global::hmodDLL, 1);
@@ -115,11 +115,15 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
 
     reinterpret_cast<void(__thiscall*)(void*,const char*, const char*, bool, bool, const char*, const char*, const char*, const char*, const char*)>(reinterpret_cast<void***>(iGameUI)[0][20])(iGameUI, xorstr("pastascat practice cheat"),
     xorstr(
-    "[Insert] - x88 Mode\n"
-    "x88Mode Keybinds:\n"
+    "[Insert] - Toggle Mode\n"
+    "Toggle Mode Keybinds:\n"
     "[TAB] - Player list\n"
-    "[END] - Unload\n "
-    "[QWERTY...] - Option position corresponds to option toggle"
+    "[END] - Unload\n"
+    "[QWERTY...] - Option position corresponds to option toggle\n"
+    "[ - Previous clantag\n"
+    "] - Next clantag\n"
+    "Custom commands:\n"
+    "!clantag - Sets the clantag"
     ), true, false, nullptr, nullptr, nullptr, nullptr, nullptr);
 
     return 0;

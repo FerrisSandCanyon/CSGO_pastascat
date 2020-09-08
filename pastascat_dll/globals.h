@@ -13,7 +13,7 @@ namespace pc
 	/// <summary>
 	/// Namespace for function pointers to the original function address of hooked functions
 	/// </summary>
-	namespace hooks
+	namespace ohk
 	{
 		inline WNDPROC wndproc = nullptr; // Original window procedure callback function of CS:GO
 	}
@@ -24,5 +24,13 @@ namespace pc
 	namespace iface
 	{
 		
+	}
+
+	/// <summary>
+	/// Namespace for cheat related variables
+	/// </summary>
+	namespace cheat
+	{
+		inline bool bToggleMode = false; // Bool to track if user is in toggling mode
 	}
 }
