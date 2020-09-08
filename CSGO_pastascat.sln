@@ -13,6 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pastascat_sdk", "pastascat_
 	ProjectSection(SolutionItems) = preProject
 		pastascat_sdk\hash.cpp = pastascat_sdk\hash.cpp
 		pastascat_sdk\hash.h = pastascat_sdk\hash.h
+		pastascat_sdk\types.h = pastascat_sdk\types.h
+		pastascat_sdk\vmthook.cpp = pastascat_sdk\vmthook.cpp
+		pastascat_sdk\vmthook.h = pastascat_sdk\vmthook.h
 	EndProjectSection
 EndProject
 Global

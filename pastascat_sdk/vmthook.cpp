@@ -9,7 +9,7 @@ namespace pc
 			old = instance[0][idx];
 			instance[0][idx] = fnNew;
 
-			return true;
+			return instance[0][idx] == fnNew;
 		}
 	}
 }
