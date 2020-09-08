@@ -1,4 +1,7 @@
 #pragma once
+#include "./sdk/types.h"
+#include "./sdk/ISurface.h"
+
 namespace pc
 {
 	/// <summary>
@@ -16,6 +19,7 @@ namespace pc
 	namespace ohk
 	{
 		inline WNDPROC wndproc = nullptr; // Original window procedure callback function of CS:GO
+		inline pc::sdk::PaintTraverse_t PaintTraverse = nullptr; // Original PaintTraverse function
 	}
 
 	/// <summary>
@@ -23,7 +27,8 @@ namespace pc
 	/// </summary>
 	namespace iface
 	{
-		
+		inline void*	 Panel   = nullptr;
+		inline ISurface* Surface = nullptr;
 	}
 
 	/// <summary>
@@ -31,6 +36,7 @@ namespace pc
 	/// </summary>
 	namespace cheat
 	{
+		inline unsigned long font = 0;
 		inline bool bToggleMode = false; // Bool to track if user is in toggling mode
 	}
 }

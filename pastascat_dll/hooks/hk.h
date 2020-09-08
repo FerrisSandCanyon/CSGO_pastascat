@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include "../globals.h"
+#include "../sdk/types.h"
 
 namespace pc
 {
@@ -11,5 +12,6 @@ namespace pc
 	namespace hooked
 	{
 		LRESULT __stdcall WindowProc(_In_ HWND   hwnd, _In_ UINT   uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam);
+		void __fastcall PaintTraverse(void* ecx, void* edx, unsigned int panel, bool forceRepaint, bool allowForce);
 	}
 }

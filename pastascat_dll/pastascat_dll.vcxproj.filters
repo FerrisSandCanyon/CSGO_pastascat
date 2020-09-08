@@ -4,29 +4,35 @@
     <Filter Include="hooks">
       <UniqueIdentifier>{943ee394-97d9-473f-9084-91a9ef64ac48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hooks\wndproc">
-      <UniqueIdentifier>{a75239eb-b424-4864-923e-70af3937eb5e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="features">
       <UniqueIdentifier>{5b8578e3-23e9-4e3a-983c-230d8b0b2dd2}</UniqueIdentifier>
     </Filter>
     <Filter Include="menu">
       <UniqueIdentifier>{6d412c85-d1e1-406b-be6a-a6eb749c5278}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sdk">
+      <UniqueIdentifier>{706f2688-b656-440b-9649-82cffc2a6dd1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals.h" />
-    <ClInclude Include="hooks\hk_wndproc.h">
-      <Filter>hooks\wndproc</Filter>
+    <ClInclude Include="sdk\types.h">
+      <Filter>sdk</Filter>
     </ClInclude>
     <ClInclude Include="hooks\hk.h">
-      <Filter>hooks\wndproc</Filter>
+      <Filter>hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\ISurface.h">
+      <Filter>sdk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="hooks\hk_wndproc.cpp">
-      <Filter>hooks\wndproc</Filter>
+      <Filter>hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="hooks\hk_painttraverse.cpp">
+      <Filter>hooks</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

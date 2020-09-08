@@ -1,4 +1,7 @@
 #include <Windows.h>
+
+#pragma comment(lib, "../pastascat_sdk/MinHook_lib/libMinHook-x86-v141-mt.lib")
+#include "../pastascat_sdk/MinHook.h"
 #include "../pastascat_sdk/xorstr.h"
 #include "./globals.h"
 #include "./hooks/hk.h"
@@ -99,7 +102,8 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
         };
 
         iGameUI = GetInterface(xorstr(L"client"), xorstr("GameUI011"));
-
+        pc::iface::Surface = reinterpret_cast<ISurface*>(GetInterface(xorstr(L"vguimatsurface"), xorstr("VGUI_Surface031")));
+        pc::iface::Panel = GetInterface(xorstr(L"vgui2"), xorstr("VGUI_Panel009"));
     }
     #pragma endregion
 
@@ -111,6 +115,32 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
         FreeLibraryAndExitThread(pc::global::hmodDLL, 1);
         return 1;
     }
+
+    // Initialize MinHook
+    if (MH_Initialize() != MH_OK)
+    {
+        MessageBox(pc::global::hwndCSGO, xorstr(L"Failed to initialize MinHook"), xorstr(L"pastascat"), 0);
+        FreeLibraryAndExitThread(pc::global::hmodDLL, 1);
+        return 1;
+    }
+
+    // Hook PaintTraverse
+    if (MH_CreateHook(reinterpret_cast<void***>(pc::iface::Panel)[0][41], pc::hooked::PaintTraverse, reinterpret_cast<void**>(&pc::ohk::PaintTraverse)))
+    {
+        MessageBox(pc::global::hwndCSGO, xorstr(L"Failed to hook PaintTraverse"), xorstr(L"pastascat"), 0);
+        FreeLibraryAndExitThread(pc::global::hmodDLL, 1);
+        return 1;
+    }
+
+    // Register the hook
+    MH_EnableHook(MH_ALL_HOOKS);
+    #pragma endregion
+    
+    #pragma region Finalize
+    // Create font
+    pc::cheat::font = pc::iface::Surface->SourceCreateFont();
+    pc::iface::Surface->SetFont(pc::cheat::font, "Tahoma", 12, 500, 0, 0, FontFlags::OUTLINE);
+
     #pragma endregion
 
     reinterpret_cast<void(__thiscall*)(void*,const char*, const char*, bool, bool, const char*, const char*, const char*, const char*, const char*)>(reinterpret_cast<void***>(iGameUI)[0][20])(iGameUI, xorstr("pastascat practice cheat"),

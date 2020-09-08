@@ -1,4 +1,5 @@
 #include "./hk.h"
+#include "../../pastascat_sdk/MinHook.h"
 
 namespace pc
 {
@@ -24,14 +25,20 @@ namespace pc
 			// Handle the messages when on toggle mode
 			switch (wParam)
 			{
-				
 				case VK_END: // Unload
 				{
-					// Restore ohk
-					SetWindowLongPtr(pc::global::hwndCSGO, GWLP_WNDPROC, reinterpret_cast<LONG>(pc::ohk::wndproc));
+					void (*exitthread)(LPVOID) = [](LPVOID arg) -> void
+					{
+						// Restore hooks
+						SetWindowLongPtr(pc::global::hwndCSGO, GWLP_WNDPROC, reinterpret_cast<LONG>(pc::ohk::wndproc));
+						MH_DisableHook(MH_ALL_HOOKS);
+						MH_Uninitialize();
 
-					// Free the library
-					FreeLibraryAndExitThread(pc::global::hmodDLL, 0);
+						// Free the library
+						FreeLibraryAndExitThread(pc::global::hmodDLL, 0);
+					};
+
+					CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(exitthread), nullptr, NULL, nullptr);
 					break;
 				}
 			}
