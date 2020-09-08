@@ -5,19 +5,20 @@
 #include "../pastascat_sdk/hash.h"
 
 // Assert macro
-#define assert(x) \
-if (!x) \
-{ \
-    puts("Failed!"); \
-    return 1; \
-}
+#define assert(x) if (!x) goto AssertionFailed
+
+#ifdef _DEBUG
+    #define BUILD_MODE_TXT " debug "
+#else
+    #define BUILD_MODE_TXT " "
+#endif
 
 int main()
 {
     HANDLE hCSGO     = nullptr; // Open process handle to CS:GO
     void*  fnLoadLib = nullptr; // Pointer to the LoadLibraryA function
 
-    puts("pastascat loader for CS:GO");
+    puts("pastascat" BUILD_MODE_TXT "loader for CS:GO");
 
     // Obtain process handle
     {
@@ -25,7 +26,7 @@ int main()
         printf("Creating process snapshot... ");
         HANDLE hProcSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
         assert(hProcSnap);
-
+        
         // Parse the process snapshot
         printf("0x%p\nLocating CS:GO... ", hProcSnap);
         PROCESSENTRY32 pe32 = { sizeof(PROCESSENTRY32) };
@@ -33,7 +34,7 @@ int main()
         {
             if (pc::utils::cx_fnv(pe32.szExeFile, sizeof("csgo.exe") - 1) == pc::utils::cx_fnv("csgo.exe"))
             {
-                printf(" Opening handle... ");
+                printf("Opening handle... ");
                 hCSGO = OpenProcess(PROCESS_ALL_ACCESS, false, pe32.th32ProcessID);
                 break;
             }
@@ -55,19 +56,19 @@ int main()
             return 1;
         }
 
-        puts("ok!");
+        printf("0x%p", fnLoadLib);
     }
     
     // Load the DLL
     {
         wchar_t szDLLPath[MAX_PATH] = { '\0' };
-        printf("Loading full path: ");
+        printf("\nLoading full path: ");
         size_t nPathSize = GetFullPathName(L"pastascat_dll.dll", MAX_PATH - 1, szDLLPath, nullptr) * sizeof(TCHAR); // Obtain the full path (MAX_PATH - 1 just for null terminator sanity)
         assert(nPathSize);
         wprintf(L"%ls", szDLLPath);
         
         // Allocate memory in CS:GO to hold the path string buffer
-        printf("Allocating memory... ");
+        printf("\nAllocating memory... ");
         HANDLE pAllocStrBuff = VirtualAllocEx(hCSGO, nullptr, nPathSize, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
         assert(pAllocStrBuff);
 
@@ -80,7 +81,7 @@ int main()
         printf("Creating remote thread... ");
         HANDLE hCRT = CreateRemoteThread(hCSGO, nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(fnLoadLib), pAllocStrBuff, NULL, nullptr);
         assert(hCRT);
-        printf("[0x%p] Waiting... ", hCRT);
+        printf("0x%p\nWaiting... ", hCRT);
         WaitForSingleObject(hCRT, INFINITE);
         puts("ok!");
 
@@ -95,4 +96,8 @@ int main()
     }
 
     return 0;
+
+    AssertionFailed:
+    puts("Failed!");
+    return 1;
 }
