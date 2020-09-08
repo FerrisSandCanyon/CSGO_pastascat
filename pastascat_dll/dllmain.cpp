@@ -1,6 +1,11 @@
 #include <Windows.h>
 
-#pragma comment(lib, "../pastascat_sdk/MinHook_lib/libMinHook-x86-v141-mt.lib")
+#if _DEBUG
+    #pragma comment(lib, "../pastascat_sdk/MinHook_lib/libMinHook-x86-v141-mdd.lib")
+#else
+    #pragma comment(lib, "../pastascat_sdk/MinHook_lib/libMinHook-x86-v141-mtd.lib")
+#endif
+
 #include "../pastascat_sdk/MinHook.h"
 #include "../pastascat_sdk/xorstr.h"
 #include "./globals.h"
