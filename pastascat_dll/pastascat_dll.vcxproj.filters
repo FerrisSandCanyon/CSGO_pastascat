@@ -34,5 +34,8 @@
     <ClCompile Include="hooks\hk_painttraverse.cpp">
       <Filter>hooks</Filter>
     </ClCompile>
+    <ClCompile Include="hooks\hk_clientcmd.cpp">
+      <Filter>hooks</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

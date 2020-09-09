@@ -20,6 +20,7 @@ namespace pc
 	{
 		inline WNDPROC wndproc = nullptr; // Original window procedure callback function of CS:GO
 		inline pc::sdk::PaintTraverse_t PaintTraverse = nullptr; // Original PaintTraverse function
+		inline pc::sdk::ClientCMD_t     ClientCMD     = nullptr; // Oeiginal ClientCMD function
 	}
 
 	/// <summary>
@@ -29,6 +30,7 @@ namespace pc
 	{
 		inline void*	 Panel   = nullptr;
 		inline ISurface* Surface = nullptr;
+		inline void*     Engine  = nullptr;
 	}
 
 	/// <summary>

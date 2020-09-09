@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="hooks\hk_clientcmd.cpp" />
     <ClCompile Include="hooks\hk_painttraverse.cpp" />
     <ClCompile Include="hooks\hk_wndproc.cpp" />
   </ItemGroup>

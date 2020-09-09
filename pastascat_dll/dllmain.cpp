@@ -109,6 +109,7 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
         iGameUI = GetInterface(xorstr(L"client"), xorstr("GameUI011"));
         pc::iface::Surface = reinterpret_cast<ISurface*>(GetInterface(xorstr(L"vguimatsurface"), xorstr("VGUI_Surface031")));
         pc::iface::Panel = GetInterface(xorstr(L"vgui2"), xorstr("VGUI_Panel009"));
+        pc::iface::Engine = GetInterface(xorstr(L"engine"), xorstr("VEngineClient014"));
     }
     #pragma endregion
 
@@ -137,18 +138,27 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
         return 1;
     }
 
+    // Hook ClientCMD
+    if (MH_CreateHook(reinterpret_cast<void***>(pc::iface::Engine)[0][7], pc::hooked::ClientCMD, reinterpret_cast<void**>(&pc::ohk::ClientCMD)))
+    {
+        MessageBox(pc::global::hwndCSGO, xorstr(L"Failed to hook ClientCMD"), xorstr(L"pastascat"), 0);
+        FreeLibraryAndExitThread(pc::global::hmodDLL, 1);
+        return 1;
+    }
+
     // Register the hooks
     MH_EnableHook(MH_ALL_HOOKS);
     #pragma endregion
     
     #pragma region Finalize
     // Create font
-    pc::cheat::font = pc::iface::Surface->SourceCreateFont();
+    pc::cheat::font = reinterpret_cast<unsigned long(*)(void)>(reinterpret_cast<void***>(pc::iface::Surface)[0][71])();
     pc::iface::Surface->SetFont(pc::cheat::font, "Tahoma", 12, 500, 0, 0, FontFlags::OUTLINE);
 
     #pragma endregion
 
-    reinterpret_cast<void(__thiscall*)(void*,const char*, const char*, bool, bool, const char*, const char*, const char*, const char*, const char*)>(reinterpret_cast<void***>(iGameUI)[0][20])(iGameUI, xorstr("pastascat practice cheat"),
+    reinterpret_cast<void(__thiscall*)(void*,const char*, const char*, bool, bool, const char*, const char*, const char*, const char*, const char*)>(reinterpret_cast<void***>(iGameUI)[0][20])(iGameUI,
+    xorstr("pastascat practice cheat"),
     xorstr(
     "Insert - Toggle Mode\n"
     "Toggle Mode Keybinds:\n"
