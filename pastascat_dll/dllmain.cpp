@@ -96,7 +96,7 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
 
             // Call CreateInterface and obtain a pointer to the specified interface
             void* pInterface = CreateInterface(szIName, nullptr);
-            if (!CreateInterface)
+            if (!pInterface)
             {
                 MessageBoxA(pc::global::hwndCSGO, szIName, xorstr("Interface cant be exported"), 0);
                 FreeLibraryAndExitThread(pc::global::hmodDLL, 1);
@@ -137,7 +137,7 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
         return 1;
     }
 
-    // Register the hook
+    // Register the hooks
     MH_EnableHook(MH_ALL_HOOKS);
     #pragma endregion
     
@@ -150,11 +150,11 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
 
     reinterpret_cast<void(__thiscall*)(void*,const char*, const char*, bool, bool, const char*, const char*, const char*, const char*, const char*)>(reinterpret_cast<void***>(iGameUI)[0][20])(iGameUI, xorstr("pastascat practice cheat"),
     xorstr(
-    "[Insert] - Toggle Mode\n"
+    "Insert - Toggle Mode\n"
     "Toggle Mode Keybinds:\n"
-    "[TAB] - Player list\n"
-    "[END] - Unload\n"
-    "[QWERTY...] - Option position corresponds to option toggle\n"
+    "TAB - Player list\n"
+    "END - Unload\n"
+    "QWERTY... - Option position corresponds to option toggle\n"
     "[ - Previous clantag\n"
     "] - Next clantag\n"
     "Custom commands:\n"
