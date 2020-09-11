@@ -46,7 +46,7 @@ DWORD __stdcall __init_thread(LPVOID lpThreadParameter)
             Sleep(1000);
             if (--nTimeToWait <= 0)
             {
-                MessageBoxW(pc::global::hwndCSGO, xorstr(L"Timed out waiting for CS:GO's waindow"), xorstr(L"pastascat"), 0);
+                MessageBoxW(pc::global::hwndCSGO, xorstr(L"Timed out waiting for CS:GO's window"), xorstr(L"pastascat"), 0);
                 FreeLibraryAndExitThread(pc::global::hmodDLL, 1);
                 return 1;
             }
