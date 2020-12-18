@@ -1,5 +1,5 @@
 # pastascat - Test CS:GO internal cheat
-This was a practice cheat to get familiar with x86 RE and CS:GO. No longer going to continue
+This was a practice cheat to get familiar with x86 RE and CS:GO (planned to be another oss cheat). No longer going to continue
 <img src="ss.png" />
 
 ## Build
@@ -15,6 +15,3 @@ This was a practice cheat to get familiar with x86 RE and CS:GO. No longer going
 ## Libraries used:
 * [xorstr](https://github.com/JustasMasiulis/xorstr) - for string obfuscation
 * [minhook](https://github.com/TsudaKageyu/minhook) - for hooking functions
-
-## ❤️
-https://www.youtube.com/watch?v=vqjx2al8R7o
